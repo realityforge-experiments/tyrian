@@ -15,7 +15,7 @@ GDX = struct(
 target_dir = "target/libgdx-#{GDX_VERSION}"
 
 task 'unzip_libgdx' do
-  download_task = download("libs/libgdx-#{GDX_VERSION}.zip" => "http://libgdx.googlecode.com/files/libgdx-#{GDX_VERSION}.zip")
+  download_task = download("downloads/libgdx-#{GDX_VERSION}.zip" => "http://libgdx.googlecode.com/files/libgdx-#{GDX_VERSION}.zip")
   download_task.invoke
 
   unzip(target_dir => download_task.name).extract unless File.exist?(target_dir)
