@@ -1,0 +1,9 @@
+/generated
+/target
+/reports
+/*.iws
+/*.ipr
+/*.iml
+/.bundle
+/bin
+/Gemfile.lock
