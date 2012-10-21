@@ -5,21 +5,21 @@ import java.util.Locale;
 
 public class TextUtils
 {
-    private static final NumberFormat FORMATTER;
+  private static final NumberFormat FORMATTER;
 
-    static {
-        FORMATTER = NumberFormat.getCurrencyInstance( Locale.US );
-        FORMATTER.setMinimumFractionDigits( 0 );
-        FORMATTER.setMaximumFractionDigits( 0 );
-    }
+  static
+  {
+    FORMATTER = NumberFormat.getCurrencyInstance( Locale.US );
+    FORMATTER.setMinimumFractionDigits( 0 );
+    FORMATTER.setMaximumFractionDigits( 0 );
+  }
 
-    private TextUtils()
-    {
-    }
+  private TextUtils()
+  {
+  }
 
-    public static String creditStyle(
-        int credits )
-    {
-        return FORMATTER.format( credits );
-    }
+  public static String creditStyle( int credits )
+  {
+    return FORMATTER.format( credits );
+  }
 }

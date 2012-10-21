@@ -8,64 +8,66 @@ import com.blogspot.steigert.tyrian.Tyrian;
 import com.blogspot.steigert.tyrian.services.SoundManager.TyrianSound;
 
 public class MenuScreen
-    extends
-        AbstractScreen
+  extends
+  AbstractScreen
 {
-    public MenuScreen(
-        Tyrian game )
+  public MenuScreen( Tyrian game )
+  {
+    super( game );
+  }
+
+  @Override
+  public void show()
+  {
+    super.show();
+
+    // retrieve the default table actor
+    Table table = super.getTable();
+    table.add( "Welcome to Tyrian for Android!" ).spaceBottom( 50 );
+    table.row();
+
+    // register the button "start game"
+    TextButton startGameButton = new TextButton( "Start game", getSkin() );
+    startGameButton.addListener( new ClickListener()
     {
-        super( game );
-    }
+      @Override
+      public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+      {
+        super.touchUp( event, x, y, pointer, button );
+        game.getSoundManager().play( TyrianSound.CLICK );
+        game.setScreen( new StartGameScreen( game ) );
+      }
+    } );
+    table.add( startGameButton ).size( 300, 60 ).uniform().spaceBottom( 10 );
+    table.row();
 
-    @Override
-    public void show()
+    // register the button "options"
+    TextButton optionsButton = new TextButton( "Options", getSkin() );
+    optionsButton.addListener( new ClickListener()
     {
-        super.show();
+      @Override
+      public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+      {
+        super.touchUp( event, x, y, pointer, button );
+        game.getSoundManager().play( TyrianSound.CLICK );
+        game.setScreen( new OptionsScreen( game ) );
+      }
+    } );
+    table.add( optionsButton ).uniform().fill().spaceBottom( 10 );
+    table.row();
 
-        // retrieve the default table actor
-        Table table = super.getTable();
-        table.add( "Welcome to Tyrian for Android!" ).spaceBottom( 50 );
-        table.row();
-
-        // register the button "start game"
-        TextButton startGameButton = new TextButton( "Start game", getSkin() );
-        startGameButton.addListener( new ClickListener() {
-          @Override
-          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
-          {
-                super.touchUp( event, x, y, pointer, button );
-                game.getSoundManager().play( TyrianSound.CLICK );
-                game.setScreen( new StartGameScreen( game ) );
-            }
-        } );
-        table.add( startGameButton ).size( 300, 60 ).uniform().spaceBottom( 10 );
-        table.row();
-
-        // register the button "options"
-        TextButton optionsButton = new TextButton( "Options", getSkin() );
-        optionsButton.addListener( new ClickListener() {
-          @Override
-          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
-          {
-                super.touchUp( event, x, y, pointer, button );
-                game.getSoundManager().play( TyrianSound.CLICK );
-                game.setScreen( new OptionsScreen( game ) );
-            }
-        } );
-        table.add( optionsButton ).uniform().fill().spaceBottom( 10 );
-        table.row();
-
-        // register the button "high scores"
-        TextButton highScoresButton = new TextButton( "High Scores", getSkin() );
-        highScoresButton.addListener( new ClickListener() {
-          @Override
-          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
-          {
-                super.touchUp( event, x, y, pointer, button );
-                game.getSoundManager().play( TyrianSound.CLICK );
-                game.setScreen( new HighScoresScreen( game ) );
-            }
-        } );
-        table.add( highScoresButton ).uniform().fill();
-    }
+    // register the button "high scores"
+    TextButton highScoresButton = new TextButton( "High Scores", getSkin() );
+    highScoresButton.addListener( new ClickListener()
+    {
+      @Override
+      public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+      {
+        super.touchUp( event, x, y, pointer, button );
+        game.getSoundManager().play( TyrianSound.CLICK );
+        game.setScreen( new HighScoresScreen( game ) );
+      }
+    } );
+    table.add( highScoresButton ).uniform().fill();
+  }
 }
