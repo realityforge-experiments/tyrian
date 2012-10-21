@@ -7,9 +7,7 @@ GDX = struct(
   :core_natives => "com.badlogic.gdx:gdx-natives:jar:#{GDX_VERSION}",
   :backend_lwjgl => "com.badlogic.gdx:gdx-backend-lwjgl:jar:#{GDX_VERSION}",
   :backend_lwjgl_sources => "com.badlogic.gdx:gdx-backend-lwjgl:jar:sources:#{GDX_VERSION}",
-  :backend_lwjgl_natives => "com.badlogic.gdx:backend_lwjgl_natives:jar:#{GDX_VERSION}",
-  # Package does not include sources for gdx_setup_ui
-  :gdx_setup_ui => "com.badlogic.gdx:gdx-setup-ui:jar:#{GDX_VERSION}"
+  :backend_lwjgl_natives => "com.badlogic.gdx:backend_lwjgl_natives:jar:#{GDX_VERSION}"
 )
 
 target_dir = "target/libgdx-#{GDX_VERSION}"
@@ -29,4 +27,3 @@ artifact(GDX.tools_sources).from(file("#{target_dir}/extensions/sources/gdx-tool
 artifact(GDX.backend_lwjgl).from(file("#{target_dir}/gdx-backend-lwjgl.jar" => %w(unzip_libgdx)))
 artifact(GDX.backend_lwjgl_sources).from(file("#{target_dir}/sources/gdx-backend-lwjgl-sources.jar" => %w(unzip_libgdx)))
 artifact(GDX.backend_lwjgl_natives).from(file("#{target_dir}/gdx-backend-lwjgl-natives.jar" => %w(unzip_libgdx)))
-artifact(GDX.gdx_setup_ui).from(file("#{target_dir}/gdx-setup-ui.jar" => %w(unzip_libgdx)))
