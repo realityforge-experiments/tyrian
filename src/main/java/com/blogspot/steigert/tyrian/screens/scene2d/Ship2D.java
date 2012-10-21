@@ -1,5 +1,6 @@
 package com.blogspot.steigert.tyrian.screens.scene2d;
 
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,7 +87,7 @@ public class Ship2D
     {
         // the super constructor does a lot of work
         super( tiltAnimationFrames.get( 0 ) );
-        super.setTouchable( false );
+        super.setTouchable( Touchable.disabled );
 
         // set some basic attributes
         this.position = new Vector2();

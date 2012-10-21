@@ -1,11 +1,11 @@
 package com.blogspot.steigert.tyrian.screens;
 
-import com.badlogic.gdx.scenes.scene2d.ActorEvent;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.blogspot.steigert.tyrian.Tyrian;
 import com.blogspot.steigert.tyrian.services.SoundManager.TyrianSound;
-import com.blogspot.steigert.tyrian.utils.DefaultActorListener;
 
 public class MenuScreen
     extends
@@ -29,15 +29,10 @@ public class MenuScreen
 
         // register the button "start game"
         TextButton startGameButton = new TextButton( "Start game", getSkin() );
-        startGameButton.addListener( new DefaultActorListener() {
-            @Override
-            public void touchUp(
-                ActorEvent event,
-                float x,
-                float y,
-                int pointer,
-                int button )
-            {
+        startGameButton.addListener( new ClickListener() {
+          @Override
+          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+          {
                 super.touchUp( event, x, y, pointer, button );
                 game.getSoundManager().play( TyrianSound.CLICK );
                 game.setScreen( new StartGameScreen( game ) );
@@ -48,15 +43,10 @@ public class MenuScreen
 
         // register the button "options"
         TextButton optionsButton = new TextButton( "Options", getSkin() );
-        optionsButton.addListener( new DefaultActorListener() {
-            @Override
-            public void touchUp(
-                ActorEvent event,
-                float x,
-                float y,
-                int pointer,
-                int button )
-            {
+        optionsButton.addListener( new ClickListener() {
+          @Override
+          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+          {
                 super.touchUp( event, x, y, pointer, button );
                 game.getSoundManager().play( TyrianSound.CLICK );
                 game.setScreen( new OptionsScreen( game ) );
@@ -67,15 +57,10 @@ public class MenuScreen
 
         // register the button "high scores"
         TextButton highScoresButton = new TextButton( "High Scores", getSkin() );
-        highScoresButton.addListener( new DefaultActorListener() {
-            @Override
-            public void touchUp(
-                ActorEvent event,
-                float x,
-                float y,
-                int pointer,
-                int button )
-            {
+        highScoresButton.addListener( new ClickListener() {
+          @Override
+          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+          {
                 super.touchUp( event, x, y, pointer, button );
                 game.getSoundManager().play( TyrianSound.CLICK );
                 game.setScreen( new HighScoresScreen( game ) );

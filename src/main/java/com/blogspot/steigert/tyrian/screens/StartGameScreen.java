@@ -3,13 +3,14 @@ package com.blogspot.steigert.tyrian.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ActorEvent;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.blogspot.steigert.tyrian.Tyrian;
 import com.blogspot.steigert.tyrian.domain.FrontGun;
@@ -20,7 +21,6 @@ import com.blogspot.steigert.tyrian.domain.Ship;
 import com.blogspot.steigert.tyrian.domain.ShipModel;
 import com.blogspot.steigert.tyrian.services.MusicManager.TyrianMusic;
 import com.blogspot.steigert.tyrian.services.SoundManager.TyrianSound;
-import com.blogspot.steigert.tyrian.utils.DefaultActorListener;
 
 public class StartGameScreen
     extends
@@ -126,14 +126,10 @@ public class StartGameScreen
 
         // register the back button
         TextButton backButton = new TextButton( "Back to main menu", getSkin() );
-        backButton.addListener( new DefaultActorListener() {
-            public void touchUp(
-                ActorEvent event,
-                float x,
-                float y,
-                int pointer,
-                int button )
-            {
+        backButton.addListener( new ClickListener() {
+          @Override
+          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+          {
                 game.getSoundManager().play( TyrianSound.CLICK );
                 game.setScreen( new MenuScreen( game ) );
             }
@@ -170,16 +166,11 @@ public class StartGameScreen
      */
     private class LevelClickListener
         extends
-            DefaultActorListener
+            ClickListener
     {
-        @Override
-        public void touchUp(
-            ActorEvent event,
-            float x,
-            float y,
-            int pointer,
-            int button )
-        {
+          @Override
+          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+          {
             super.touchUp( event, x, y, pointer, button );
             game.getSoundManager().play( TyrianSound.CLICK );
 

@@ -1,19 +1,18 @@
 package com.blogspot.steigert.tyrian.screens;
 
-import java.util.Locale;
-
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ActorEvent;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.blogspot.steigert.tyrian.Tyrian;
 import com.blogspot.steigert.tyrian.services.MusicManager.TyrianMusic;
 import com.blogspot.steigert.tyrian.services.SoundManager.TyrianSound;
-import com.blogspot.steigert.tyrian.utils.DefaultActorListener;
+import java.util.Locale;
 
 /**
  * A simple options screen.
@@ -82,7 +81,7 @@ public class OptionsScreen
         table.add( musicCheckbox ).colspan( 2 ).left();
 
         // range is [0.0,1.0]; step is 0.1f
-        Slider volumeSlider = new Slider( 0f, 1f, 0.1f, getSkin() );
+        Slider volumeSlider = new Slider( 0f, 1f, 0.1f, false, getSkin() );
         volumeSlider.setValue( game.getPreferencesManager().getVolume() );
         volumeSlider.addListener( new ChangeListener() {
             @Override
@@ -110,15 +109,10 @@ public class OptionsScreen
 
         // register the back button
         TextButton backButton = new TextButton( "Back to main menu", getSkin() );
-        backButton.addListener( new DefaultActorListener() {
-            @Override
-            public void touchUp(
-                ActorEvent event,
-                float x,
-                float y,
-                int pointer,
-                int button )
-            {
+        backButton.addListener( new ClickListener() {
+          @Override
+          public void touchUp( final InputEvent event, final float x, final float y, final int pointer, final int button )
+          {
                 super.touchUp( event, x, y, pointer, button );
                 game.getSoundManager().play( TyrianSound.CLICK );
                 game.setScreen( new MenuScreen( game ) );
