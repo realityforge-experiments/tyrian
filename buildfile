@@ -9,9 +9,7 @@ define('tyrian') do
                GDX.core_natives,
                GDX.backend_lwjgl,
                GDX.backend_lwjgl_natives,
-               GDX.tools,
-               GDX.gdx_stb_truetype,
-               GDX.gdx_stb_truetype_natives
+               GDX.tools
 
   package(:jar)
   package(:sources)
