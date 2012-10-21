@@ -111,7 +111,7 @@ level-screen/ship-model-usp-talon
 
 pages2.png
 format: RGBA8888
-filter: Linear,Linear
+filter: Nearest,Nearest
 repeat: none
 splash-screen/splash-image
   rotate: false
