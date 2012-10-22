@@ -11,7 +11,7 @@ public class VectorUtils
    * Returns <code>true</code> if the value was adjusted, <code>false</code>
    * otherwise.
    */
-  public static boolean adjustByRangeX( Vector2 vector, float min, float max )
+  public static boolean adjustByRangeX( final Vector2 vector, final float min, final float max )
   {
     if( vector.x < min )
     {
@@ -33,7 +33,7 @@ public class VectorUtils
    * Returns <code>true</code> if the value was adjusted, <code>false</code>
    * otherwise.
    */
-  public static boolean adjustByRangeY( Vector2 vector, float min, float max )
+  public static boolean adjustByRangeY( final Vector2 vector, final float min, final float max )
   {
     if( vector.y < min )
     {
@@ -55,7 +55,7 @@ public class VectorUtils
    * Returns <code>true</code> if at least one of the values was adjusted,
    * <code>false</code> otherwise.
    */
-  public static boolean adjustByRange( Vector2 vector, float xMin, float xMax, float yMin, float yMax )
+  private static boolean adjustByRange( final Vector2 vector, final float xMin, final float xMax, final float yMin, final float yMax )
   {
     boolean modified = false;
     if( adjustByRangeX( vector, xMin, xMax ) ) modified = true;
@@ -70,7 +70,7 @@ public class VectorUtils
    * Returns <code>true</code> if at least one of the values was adjusted,
    * <code>false</code> otherwise.
    */
-  public static boolean adjustByRange( Vector2 vector, float min, float max )
+  public static boolean adjustByRange( final Vector2 vector, final float min, final float max )
   {
     return adjustByRange( vector, min, max, min, max );
   }
@@ -79,7 +79,7 @@ public class VectorUtils
    * Uses the given value when the vector coordinates are less than or equal
    * to the specified radius value.
    */
-  public static boolean adjustDeadzone( Vector2 vector, float radius, float adjustedValue )
+  public static boolean adjustDeadzone( final Vector2 vector, final float radius, final float adjustedValue )
   {
     if( vector.len() <= radius )
     {
@@ -90,5 +90,4 @@ public class VectorUtils
     return false;
   }
 
-  static final String TAG = VectorUtils.class.getSimpleName();
 }

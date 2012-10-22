@@ -23,7 +23,7 @@ public class Profile
 {
   private int currentLevelId;
   private int credits;
-  private Map<Integer, Integer> highScores;
+  private final Map<Integer, Integer> highScores;
   private Ship ship;
 
   public Profile()
@@ -45,43 +45,13 @@ public class Profile
   }
 
   /**
-   * Retrieves the high scores for each level (Level-ID -> High score).
-   */
-  public Map<Integer, Integer> getHighScores()
-  {
-    return highScores;
-  }
-
-  /**
    * Gets the current high score for the given level.
    */
-  public int getHighScore( int levelId )
+  public int getHighScore( final int levelId )
   {
     if( highScores == null ) return 0;
-    Integer highScore = highScores.get( levelId );
+    final Integer highScore = highScores.get( levelId );
     return ( highScore == null ? 0 : highScore );
-  }
-
-  /**
-   * Notifies the score on the given level. Returns <code>true</code> if its a
-   * high score.
-   */
-  public boolean notifyScore( int levelId, int score )
-  {
-    if( score > getHighScore( levelId ) )
-    {
-      highScores.put( levelId, score );
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * Retrieves the amount of credits the player has.
-   */
-  public int getCredits()
-  {
-    return credits;
   }
 
   /**
@@ -103,23 +73,15 @@ public class Profile
   /**
    * Checks whether the given item can be bought.
    */
-  public boolean canBuy( Item item )
+  boolean canBuy( final Item item )
   {
-    if( ship.contains( item ) )
-    {
-      return false;
-    }
-    if( item.getPrice() > credits )
-    {
-      return false;
-    }
-    return true;
+    return !ship.contains( item ) && item.getPrice() <= credits;
   }
 
   /**
    * Buys the given item.
    */
-  public boolean buy( Item item )
+  public boolean buy( final Item item )
   {
     if( canBuy( item ) )
     {
@@ -140,7 +102,7 @@ public class Profile
 
   @SuppressWarnings( "unchecked" )
   @Override
-  public void read( Json json, OrderedMap<String, Object> jsonData )
+  public void read( final Json json, final OrderedMap<String, Object> jsonData )
   {
     // read the some basic properties
     currentLevelId = json.readValue( "currentLevelId", Integer.class, jsonData );
@@ -148,12 +110,12 @@ public class Profile
 
     // libgdx handles the keys of JSON formatted HashMaps as Strings, but we
     // want it to be an integer instead (levelId)
-    Map<String, Integer> highScores = json.readValue( "highScores", HashMap.class,
+    final Map<String, Integer> highScores = json.readValue( "highScores", HashMap.class,
                                                       Integer.class, jsonData );
-    for( String levelIdAsString : highScores.keySet() )
+    for( final String levelIdAsString : highScores.keySet() )
     {
-      int levelId = Integer.valueOf( levelIdAsString );
-      Integer highScore = highScores.get( levelIdAsString );
+      final int levelId = Integer.valueOf( levelIdAsString );
+      final Integer highScore = highScores.get( levelIdAsString );
       this.highScores.put( levelId, highScore );
     }
 
@@ -162,7 +124,7 @@ public class Profile
   }
 
   @Override
-  public void write( Json json )
+  public void write( final Json json )
   {
     json.writeValue( "currentLevelId", currentLevelId );
     json.writeValue( "credits", credits );

@@ -6,7 +6,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.blogspot.steigert.tyrian.screens.LevelScreen;
 import com.blogspot.steigert.tyrian.screens.SplashScreen;
-import com.blogspot.steigert.tyrian.services.LevelManager;
 import com.blogspot.steigert.tyrian.services.MusicManager;
 import com.blogspot.steigert.tyrian.services.PreferencesManager;
 import com.blogspot.steigert.tyrian.services.ProfileManager;
@@ -22,7 +21,7 @@ public class Tyrian
   public static final String LOG = Tyrian.class.getSimpleName();
 
   // whether we are in development mode
-  public static final boolean DEV_MODE = false;
+  public static final boolean DEV_MODE = System.getProperty( "Tyrian.debug", "false" ).equalsIgnoreCase( "true" );
 
   // a libgdx helper class that logs the current FPS each second
   private FPSLogger fpsLogger;
@@ -30,7 +29,6 @@ public class Tyrian
   // services
   private PreferencesManager preferencesManager;
   private ProfileManager profileManager;
-  private LevelManager levelManager;
   private MusicManager musicManager;
   private SoundManager soundManager;
 
@@ -48,11 +46,6 @@ public class Tyrian
   public ProfileManager getProfileManager()
   {
     return profileManager;
-  }
-
-  public LevelManager getLevelManager()
-  {
-    return levelManager;
   }
 
   public MusicManager getMusicManager()
@@ -89,15 +82,12 @@ public class Tyrian
     profileManager = new ProfileManager();
     profileManager.retrieveProfile();
 
-    // create the level manager
-    levelManager = new LevelManager();
-
     // create the helper objects
     fpsLogger = new FPSLogger();
   }
 
   @Override
-  public void resize( int width, int height )
+  public void resize( final int width, final int height )
   {
     super.resize( width, height );
     Gdx.app.log( Tyrian.LOG, "Resizing game to: " + width + " x " + height );
@@ -108,7 +98,7 @@ public class Tyrian
     {
       if( DEV_MODE )
       {
-        setScreen( new LevelScreen( this, 0 ) );
+        setScreen( new LevelScreen( this ) );
       }
       else
       {
@@ -145,7 +135,7 @@ public class Tyrian
   }
 
   @Override
-  public void setScreen( Screen screen )
+  public void setScreen( final Screen screen )
   {
     super.setScreen( screen );
     Gdx.app.log( Tyrian.LOG, "Setting screen: " + screen.getClass().getSimpleName() );

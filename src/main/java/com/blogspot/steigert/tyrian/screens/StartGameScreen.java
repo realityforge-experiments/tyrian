@@ -40,10 +40,10 @@ public class StartGameScreen
   private Image frontGunImage;
   private Image shieldImage;
 
-  private LevelClickListener levelClickListener;
-  private ItemSelectionListener itemSelectionListener;
+  private final LevelClickListener levelClickListener;
+  private final ItemSelectionListener itemSelectionListener;
 
-  public StartGameScreen( Tyrian game )
+  public StartGameScreen( final Tyrian game )
   {
     super( game );
 
@@ -62,7 +62,7 @@ public class StartGameScreen
     game.getMusicManager().play( TyrianMusic.MENU );
 
     // retrieve the default table actor
-    Table table = super.getTable();
+    final Table table = super.getTable();
     table.defaults().spaceBottom( 20 );
     table.columnDefaults( 0 ).padRight( 20 );
     table.columnDefaults( 4 ).padLeft( 10 );
@@ -123,7 +123,7 @@ public class StartGameScreen
     table.add( creditsLabel ).left().colspan( 4 );
 
     // register the back button
-    TextButton backButton = new TextButton( "Back to main menu", getSkin() );
+    final TextButton backButton = new TextButton( "Back to main menu", getSkin() );
     backButton.addListener( new ClickListener()
     {
       @Override
@@ -148,11 +148,11 @@ public class StartGameScreen
     shieldSelectBox.setSelection( ship.getShield().ordinal() );
 
     // drawables
-    String prefix = "start-game-screen/";
-    TextureRegion shipModel = getAtlas().findRegion(
+    final String prefix = "start-game-screen/";
+    final TextureRegion shipModel = getAtlas().findRegion(
       prefix + ship.getShipModel().getSimpleName() );
-    TextureRegion frontGun = getAtlas().findRegion( prefix + ship.getFrontGun().getSimpleName() );
-    TextureRegion shield = getAtlas().findRegion( prefix + ship.getShield().getSimpleName() );
+    final TextureRegion frontGun = getAtlas().findRegion( prefix + ship.getFrontGun().getSimpleName() );
+    final TextureRegion shield = getAtlas().findRegion( prefix + ship.getShield().getSimpleName() );
 
     // images
     shipModelImage.setDrawable( new TextureRegionDrawable( shipModel ) );
@@ -173,8 +173,8 @@ public class StartGameScreen
       game.getSoundManager().play( TyrianSound.CLICK );
 
       // find the target level ID
-      int targetLevelId = -1;
-      Actor actor = event.getListenerActor();
+      final int targetLevelId;
+      final Actor actor = event.getListenerActor();
       if( actor == episode1Button )
       {
         targetLevelId = 0;
@@ -196,7 +196,7 @@ public class StartGameScreen
       if( profile.getCurrentLevelId() >= targetLevelId )
       {
         Gdx.app.log( Tyrian.LOG, "Starting level: " + targetLevelId );
-        game.setScreen( new LevelScreen( game, targetLevelId ) );
+        game.setScreen( new LevelScreen( game ) );
       }
       else
       {
@@ -213,12 +213,12 @@ public class StartGameScreen
   {
     @Override
     public void changed(
-      ChangeEvent event,
-      Actor actor )
+      final ChangeEvent event,
+      final Actor actor )
     {
       // find the selected item
-      Item selectedItem = null;
-      int selectedIndex = ( (SelectBox) actor ).getSelectionIndex();
+      final Item selectedItem;
+      final int selectedIndex = ( (SelectBox) actor ).getSelectionIndex();
       if( actor == shipModelSelectBox )
       {
         selectedItem = ShipModel.values()[ selectedIndex ];

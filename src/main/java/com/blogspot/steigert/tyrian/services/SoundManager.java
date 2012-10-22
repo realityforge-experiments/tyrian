@@ -24,7 +24,7 @@ public class SoundManager
 
     private final String fileName;
 
-    private TyrianSound( String fileName )
+    private TyrianSound( final String fileName )
     {
       this.fileName = fileName;
     }
@@ -62,7 +62,7 @@ public class SoundManager
   /**
    * Plays the specified sound.
    */
-  public void play( TyrianSound sound )
+  public void play( final TyrianSound sound )
   {
     // check if the sound is enabled
     if( !enabled ) return;
@@ -71,7 +71,7 @@ public class SoundManager
     Sound soundToPlay = soundCache.get( sound );
     if( soundToPlay == null )
     {
-      FileHandle soundFile = Gdx.files.internal( sound.getFileName() );
+      final FileHandle soundFile = Gdx.files.internal( sound.getFileName() );
       soundToPlay = Gdx.audio.newSound( soundFile );
       soundCache.add( sound, soundToPlay );
     }
@@ -84,7 +84,7 @@ public class SoundManager
   /**
    * Sets the sound volume which must be inside the range [0,1].
    */
-  public void setVolume( float volume )
+  public void setVolume( final float volume )
   {
     Gdx.app.log( Tyrian.LOG, "Adjusting sound volume to: " + volume );
 
@@ -99,7 +99,7 @@ public class SoundManager
   /**
    * Enables or disabled the sound.
    */
-  public void setEnabled( boolean enabled )
+  public void setEnabled( final boolean enabled )
   {
     this.enabled = enabled;
   }
@@ -107,7 +107,7 @@ public class SoundManager
   // EntryRemovedListener implementation
 
   @Override
-  public void notifyEntryRemoved( TyrianSound key, Sound value )
+  public void notifyEntryRemoved( final TyrianSound key, final Sound value )
   {
     Gdx.app.log( Tyrian.LOG, "Disposing sound: " + key.name() );
     value.dispose();
@@ -119,7 +119,7 @@ public class SoundManager
   public void dispose()
   {
     Gdx.app.log( Tyrian.LOG, "Disposing sound manager" );
-    for( Sound sound : soundCache.retrieveAll() )
+    for( final Sound sound : soundCache.retrieveAll() )
     {
       sound.stop();
       sound.dispose();

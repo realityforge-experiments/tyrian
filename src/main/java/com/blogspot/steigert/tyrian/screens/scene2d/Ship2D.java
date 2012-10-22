@@ -74,12 +74,12 @@ public class Ship2D
    * Here we cache the drawables or we would have to create them on demand
    * (hence waking up the garbage collector).
    */
-  private Map<TextureRegion, Drawable> tiltAnimationDrawables;
+  private final Map<TextureRegion, Drawable> tiltAnimationDrawables;
 
   /**
    * Creates a new {@link Ship2D}.
    */
-  private Ship2D( Ship ship, Array<AtlasRegion> tiltAnimationFrames )
+  private Ship2D( final Array<AtlasRegion> tiltAnimationFrames )
   {
     // the super constructor does a lot of work
     super( tiltAnimationFrames.get( 0 ) );
@@ -96,7 +96,7 @@ public class Ship2D
 
     // create the tilt animation drawable cache
     this.tiltAnimationDrawables = new HashMap<TextureRegion, Drawable>();
-    for( AtlasRegion region : tiltAnimationFrames )
+    for( final AtlasRegion region : tiltAnimationFrames )
     {
       tiltAnimationDrawables.put( region, new TextureRegionDrawable( region ) );
     }
@@ -105,26 +105,26 @@ public class Ship2D
   /**
    * Factory method to create a {@link Ship2D}.
    */
-  public static Ship2D create( Ship ship, TextureAtlas textureAtlas )
+  public static Ship2D create( final Ship ship, final TextureAtlas textureAtlas )
   {
     // load all the regions of our ship in the image atlas
-    Array<AtlasRegion> regions = textureAtlas.findRegions( "level-screen/"
+    final Array<AtlasRegion> regions = textureAtlas.findRegions( "level-screen/"
                                                            + ship.getShipModel().getSimpleName() );
 
     // create the ship
-    return new Ship2D( ship, regions );
+    return new Ship2D( regions );
   }
 
   /**
    * Sets the ship's initial position.
    */
-  public void setInitialPosition( float x, float y )
+  public void setInitialPosition( final float x, final float y )
   {
     position.set( x, y );
   }
 
   @Override
-  public void act( float delta )
+  public void act( final float delta )
   {
     super.act( delta );
     moveShip( delta );
@@ -134,7 +134,7 @@ public class Ship2D
   /**
    * Moves the ship around the screen.
    */
-  private void moveShip( float delta )
+  private void moveShip( final float delta )
   {
     // check the input and calculate the acceleration
     if( Gdx.input.isPeripheralAvailable( Peripheral.Accelerometer ) )
@@ -233,10 +233,10 @@ public class Ship2D
   /**
    * Tilts the ship to the direction its moving.
    */
-  private void tiltShip( float delta )
+  private void tiltShip( final float delta )
   {
     // the animation's frame to be shown
-    TextureRegion frame;
+    final TextureRegion frame;
 
     // find the appropriate frame of the tilt animation to be drawn
     if( velocity.x < 0 )
@@ -260,5 +260,4 @@ public class Ship2D
     setDrawable( tiltAnimationDrawables.get( frame ) );
   }
 
-  static final String TAG = Ship2D.class.getSimpleName();
 }

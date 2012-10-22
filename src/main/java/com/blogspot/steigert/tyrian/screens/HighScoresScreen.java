@@ -15,7 +15,7 @@ import com.blogspot.steigert.tyrian.services.SoundManager.TyrianSound;
 public class HighScoresScreen
   extends AbstractScreen
 {
-  public HighScoresScreen( Tyrian game )
+  public HighScoresScreen( final Tyrian game )
   {
     super( game );
   }
@@ -24,34 +24,34 @@ public class HighScoresScreen
   public void show()
   {
     super.show();
-    Profile profile = game.getProfileManager().retrieveProfile();
+    final Profile profile = game.getProfileManager().retrieveProfile();
 
     // retrieve the default table actor
-    Table table = super.getTable();
+    final Table table = super.getTable();
     table.defaults().spaceBottom( 30 );
     table.add( "High scores" ).colspan( 2 );
 
     // episode 1 high-score
-    String level1Highscore = String.valueOf( profile.getHighScore( 0 ) );
-    Label episode1HighScore = new Label( level1Highscore, getSkin() );
+    final String level1Highscore = String.valueOf( profile.getHighScore( 0 ) );
+    final Label episode1HighScore = new Label( level1Highscore, getSkin() );
     table.row();
     table.add( "Episode 1" );
     table.add( episode1HighScore );
 
-    String level2Highscore = String.valueOf( profile.getHighScore( 1 ) );
-    Label episode2HighScore = new Label( level2Highscore, getSkin() );
+    final String level2Highscore = String.valueOf( profile.getHighScore( 1 ) );
+    final Label episode2HighScore = new Label( level2Highscore, getSkin() );
     table.row();
     table.add( "Episode 2" ).center();
     table.add( episode2HighScore );
 
-    String level3Highscore = String.valueOf( profile.getHighScore( 2 ) );
-    Label episode3HighScore = new Label( level3Highscore, getSkin() );
+    final String level3Highscore = String.valueOf( profile.getHighScore( 2 ) );
+    final Label episode3HighScore = new Label( level3Highscore, getSkin() );
     table.row();
     table.add( "Episode 3" );
     table.add( episode3HighScore );
 
     // register the back button
-    TextButton backButton = new TextButton( "Back to main menu", getSkin() );
+    final TextButton backButton = new TextButton( "Back to main menu", getSkin() );
     backButton.addListener( new ClickListener()
     {
       @Override

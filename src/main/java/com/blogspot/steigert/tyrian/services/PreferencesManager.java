@@ -18,7 +18,7 @@ public class PreferencesManager
   {
   }
 
-  protected Preferences getPrefs()
+  Preferences getPrefs()
   {
     return Gdx.app.getPreferences( PREFS_NAME );
   }
@@ -28,7 +28,7 @@ public class PreferencesManager
     return getPrefs().getBoolean( PREF_SOUND_ENABLED, true );
   }
 
-  public void setSoundEnabled( boolean soundEffectsEnabled )
+  public void setSoundEnabled( final boolean soundEffectsEnabled )
   {
     getPrefs().putBoolean( PREF_SOUND_ENABLED, soundEffectsEnabled );
     getPrefs().flush();
@@ -39,7 +39,7 @@ public class PreferencesManager
     return getPrefs().getBoolean( PREF_MUSIC_ENABLED, true );
   }
 
-  public void setMusicEnabled( boolean musicEnabled )
+  public void setMusicEnabled( final boolean musicEnabled )
   {
     getPrefs().putBoolean( PREF_MUSIC_ENABLED, musicEnabled );
     getPrefs().flush();
@@ -50,7 +50,7 @@ public class PreferencesManager
     return getPrefs().getFloat( PREF_VOLUME, 0.5f );
   }
 
-  public void setVolume( float volume )
+  public void setVolume( final float volume )
   {
     getPrefs().putFloat( PREF_VOLUME, volume );
     getPrefs().flush();

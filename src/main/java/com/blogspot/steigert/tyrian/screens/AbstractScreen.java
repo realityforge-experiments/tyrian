@@ -15,15 +15,17 @@ import com.blogspot.steigert.tyrian.Tyrian;
 /**
  * The base class for all game screens.
  */
-public abstract class AbstractScreen
+abstract class AbstractScreen
   implements Screen
 {
   // the fixed viewport dimensions (ratio: 1.6)
-  public static final int GAME_VIEWPORT_WIDTH = 400, GAME_VIEWPORT_HEIGHT = 240;
-  public static final int MENU_VIEWPORT_WIDTH = 800, MENU_VIEWPORT_HEIGHT = 480;
+  private static final int GAME_VIEWPORT_WIDTH = 400;
+  private static final int GAME_VIEWPORT_HEIGHT = 240;
+  private static final int MENU_VIEWPORT_WIDTH = 800;
+  private static final int MENU_VIEWPORT_HEIGHT = 480;
 
-  protected final Tyrian game;
-  protected final Stage stage;
+  final Tyrian game;
+  final Stage stage;
 
   private BitmapFont font;
   private SpriteBatch batch;
@@ -31,20 +33,20 @@ public abstract class AbstractScreen
   private TextureAtlas atlas;
   private Table table;
 
-  public AbstractScreen( Tyrian game )
+  AbstractScreen( final Tyrian game )
   {
     this.game = game;
-    int width = ( isGameScreen() ? GAME_VIEWPORT_WIDTH : MENU_VIEWPORT_WIDTH );
-    int height = ( isGameScreen() ? GAME_VIEWPORT_HEIGHT : MENU_VIEWPORT_HEIGHT );
+    final int width = ( isGameScreen() ? GAME_VIEWPORT_WIDTH : MENU_VIEWPORT_WIDTH );
+    final int height = ( isGameScreen() ? GAME_VIEWPORT_HEIGHT : MENU_VIEWPORT_HEIGHT );
     this.stage = new Stage( width, height, true );
   }
 
-  protected String getName()
+  String getName()
   {
     return getClass().getSimpleName();
   }
 
-  protected boolean isGameScreen()
+  boolean isGameScreen()
   {
     return false;
   }
@@ -69,7 +71,7 @@ public abstract class AbstractScreen
     return batch;
   }
 
-  public TextureAtlas getAtlas()
+  TextureAtlas getAtlas()
   {
     if( atlas == null )
     {
@@ -78,17 +80,17 @@ public abstract class AbstractScreen
     return atlas;
   }
 
-  protected Skin getSkin()
+  Skin getSkin()
   {
     if( skin == null )
     {
-      FileHandle skinFile = Gdx.files.internal( "skin/uiskin.json" );
+      final FileHandle skinFile = Gdx.files.internal( "skin/uiskin.json" );
       skin = new Skin( skinFile );
     }
     return skin;
   }
 
-  protected Table getTable()
+  Table getTable()
   {
     if( table == null )
     {
@@ -115,13 +117,13 @@ public abstract class AbstractScreen
   }
 
   @Override
-  public void resize( int width, int height )
+  public void resize( final int width, final int height )
   {
     Gdx.app.log( Tyrian.LOG, "Resizing screen: " + getName() + " to: " + width + " x " + height );
   }
 
   @Override
-  public void render( float delta )
+  public void render( final float delta )
   {
     // (1) process the game logic
 

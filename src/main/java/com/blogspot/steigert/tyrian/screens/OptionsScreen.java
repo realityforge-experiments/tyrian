@@ -22,7 +22,7 @@ public class OptionsScreen
 {
   private Label volumeValue;
 
-  public OptionsScreen( Tyrian game )
+  public OptionsScreen( final Tyrian game )
   {
     super( game );
   }
@@ -33,7 +33,7 @@ public class OptionsScreen
     super.show();
 
     // retrieve the default table actor
-    Table table = super.getTable();
+    final Table table = super.getTable();
     table.defaults().spaceBottom( 30 );
     table.columnDefaults( 0 ).padRight( 20 );
     table.add( "Options" ).colspan( 3 );
@@ -45,10 +45,10 @@ public class OptionsScreen
     {
       @Override
       public void changed(
-        ChangeEvent event,
-        Actor actor )
+        final ChangeEvent event,
+        final Actor actor )
       {
-        boolean enabled = soundEffectsCheckbox.isChecked();
+        final boolean enabled = soundEffectsCheckbox.isChecked();
         game.getPreferencesManager().setSoundEnabled( enabled );
         game.getSoundManager().setEnabled( enabled );
         game.getSoundManager().play( TyrianSound.CLICK );
@@ -64,10 +64,10 @@ public class OptionsScreen
     {
       @Override
       public void changed(
-        ChangeEvent event,
-        Actor actor )
+        final ChangeEvent event,
+        final Actor actor )
       {
-        boolean enabled = musicCheckbox.isChecked();
+        final boolean enabled = musicCheckbox.isChecked();
         game.getPreferencesManager().setMusicEnabled( enabled );
         game.getMusicManager().setEnabled( enabled );
         game.getSoundManager().play( TyrianSound.CLICK );
@@ -81,16 +81,16 @@ public class OptionsScreen
     table.add( musicCheckbox ).colspan( 2 ).left();
 
     // range is [0.0,1.0]; step is 0.1f
-    Slider volumeSlider = new Slider( 0f, 1f, 0.1f, false, getSkin() );
+    final Slider volumeSlider = new Slider( 0f, 1f, 0.1f, true, getSkin() );
     volumeSlider.setValue( game.getPreferencesManager().getVolume() );
     volumeSlider.addListener( new ChangeListener()
     {
       @Override
       public void changed(
-        ChangeEvent event,
-        Actor actor )
+        final ChangeEvent event,
+        final Actor actor )
       {
-        float value = ( (Slider) actor ).getValue();
+        final float value = ( (Slider) actor ).getValue();
         game.getPreferencesManager().setVolume( value );
         game.getMusicManager().setVolume( value );
         game.getSoundManager().setVolume( value );
@@ -109,7 +109,7 @@ public class OptionsScreen
     table.add( volumeValue ).width( 40 );
 
     // register the back button
-    TextButton backButton = new TextButton( "Back to main menu", getSkin() );
+    final TextButton backButton = new TextButton( "Back to main menu", getSkin() );
     backButton.addListener( new ClickListener()
     {
       @Override
@@ -129,7 +129,7 @@ public class OptionsScreen
    */
   private void updateVolumeLabel()
   {
-    float volume = ( game.getPreferencesManager().getVolume() * 100 );
+    final float volume = ( game.getPreferencesManager().getVolume() * 100 );
     volumeValue.setText( String.format( Locale.US, "%1.0f%%", volume ) );
   }
 }

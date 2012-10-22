@@ -9,29 +9,21 @@ import java.util.Locale;
 public enum ShipModel
   implements Item
 {
-  USP_TALON( "USP Talon", 6000, 1 ),
-  GENCORE_PHOENIX( "Gencore Phoenix", 12000, 2 ),
-  GENCORE_II( "Gencore II", 17000, 3 ),
-  MICROSOL_STALKER( "Microsol Stalker", 20000, 4 ),
-  SUPER_CARROT( "Super Carrot", 50000, 5 );
+  USP_TALON( "USP Talon", 6000 ),
+  GENCORE_PHOENIX( "Gencore Phoenix", 12000 ),
+  GENCORE_II( "Gencore II", 17000 ),
+  MICROSOL_STALKER( "Microsol Stalker", 20000 ),
+  SUPER_CARROT( "Super Carrot", 50000 );
 
   private final String name;
   private final int price;
-  private final int firingCapacity;
 
-  private ShipModel( String name, int price, int firingCapacity )
+  private ShipModel( final String name, final int price )
   {
     this.name = name;
     this.price = price;
-    this.firingCapacity = firingCapacity;
   }
 
-  public String getName()
-  {
-    return name;
-  }
-
-  @Override
   public String getSimpleName()
   {
     return "ship-model-" + name().replaceAll( "_", "-" ).toLowerCase();
@@ -43,24 +35,8 @@ public enum ShipModel
   }
 
   @Override
-  public String getPriceAsText()
-  {
-    return TextUtils.creditStyle( price );
-  }
-
-  /**
-   * Retrieves the firing capacity for this ship model.
-   * <p/>
-   * 1 means 1 shot each 1/4 sec.
-   */
-  public int getFiringCapacity()
-  {
-    return firingCapacity;
-  }
-
-  @Override
   public String toString()
   {
-    return String.format( Locale.US, "%s (%s) - Firing: %d", name, getPriceAsText(), firingCapacity );
+    return String.format( Locale.US, "%s (%s)", name, TextUtils.creditStyle( price ) );
   }
 }

@@ -11,7 +11,7 @@ public class MenuScreen
   extends
   AbstractScreen
 {
-  public MenuScreen( Tyrian game )
+  public MenuScreen( final Tyrian game )
   {
     super( game );
   }
@@ -22,12 +22,12 @@ public class MenuScreen
     super.show();
 
     // retrieve the default table actor
-    Table table = super.getTable();
+    final Table table = super.getTable();
     table.add( "Welcome to Tyrian for Android!" ).spaceBottom( 50 );
     table.row();
 
     // register the button "start game"
-    TextButton startGameButton = new TextButton( "Start game", getSkin() );
+    final TextButton startGameButton = new TextButton( "Start game", getSkin() );
     startGameButton.addListener( new ClickListener()
     {
       @Override
@@ -42,7 +42,7 @@ public class MenuScreen
     table.row();
 
     // register the button "options"
-    TextButton optionsButton = new TextButton( "Options", getSkin() );
+    final TextButton optionsButton = new TextButton( "Options", getSkin() );
     optionsButton.addListener( new ClickListener()
     {
       @Override
@@ -57,7 +57,7 @@ public class MenuScreen
     table.row();
 
     // register the button "high scores"
-    TextButton highScoresButton = new TextButton( "High Scores", getSkin() );
+    final TextButton highScoresButton = new TextButton( "High Scores", getSkin() );
     highScoresButton.addListener( new ClickListener()
     {
       @Override

@@ -18,7 +18,7 @@ public class TextUtils
   {
   }
 
-  public static String creditStyle( int credits )
+  public static String creditStyle( final int credits )
   {
     return FORMATTER.format( credits );
   }

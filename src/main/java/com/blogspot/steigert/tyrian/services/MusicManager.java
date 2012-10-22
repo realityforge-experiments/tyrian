@@ -22,10 +22,10 @@ public class MusicManager
     MENU( "music/menu.ogg" ),
     LEVEL( "music/level.ogg" );
 
-    private String fileName;
+    private final String fileName;
     private Music musicResource;
 
-    private TyrianMusic( String fileName )
+    private TyrianMusic( final String fileName )
     {
       this.fileName = fileName;
     }
@@ -40,7 +40,7 @@ public class MusicManager
       return musicResource;
     }
 
-    public void setMusicResource( Music musicBeingPlayed )
+    public void setMusicResource( final Music musicBeingPlayed )
     {
       this.musicResource = musicBeingPlayed;
     }
@@ -73,7 +73,7 @@ public class MusicManager
    * <p/>
    * If there is already a music being played it is stopped automatically.
    */
-  public void play( TyrianMusic music )
+  public void play( final TyrianMusic music )
   {
     // check if the music is enabled
     if( !enabled ) return;
@@ -88,8 +88,8 @@ public class MusicManager
     stop();
 
     // start streaming the new music
-    FileHandle musicFile = Gdx.files.internal( music.getFileName() );
-    Music musicResource = Gdx.audio.newMusic( musicFile );
+    final FileHandle musicFile = Gdx.files.internal( music.getFileName() );
+    final Music musicResource = Gdx.audio.newMusic( musicFile );
     musicResource.setVolume( volume );
     musicResource.setLooping( true );
     musicResource.play();
@@ -102,12 +102,12 @@ public class MusicManager
   /**
    * Stops and disposes the current music being played, if any.
    */
-  public void stop()
+  void stop()
   {
     if( musicBeingPlayed != null )
     {
       Gdx.app.log( Tyrian.LOG, "Stopping current music" );
-      Music musicResource = musicBeingPlayed.getMusicResource();
+      final Music musicResource = musicBeingPlayed.getMusicResource();
       musicResource.stop();
       musicResource.dispose();
       musicBeingPlayed = null;
@@ -117,7 +117,7 @@ public class MusicManager
   /**
    * Sets the music volume which must be inside the range [0,1].
    */
-  public void setVolume( float volume )
+  public void setVolume( final float volume )
   {
     Gdx.app.log( Tyrian.LOG, "Adjusting music volume to: " + volume );
 
@@ -138,7 +138,7 @@ public class MusicManager
   /**
    * Enables or disabled the music.
    */
-  public void setEnabled( boolean enabled )
+  public void setEnabled( final boolean enabled )
   {
     this.enabled = enabled;
 

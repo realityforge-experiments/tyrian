@@ -31,14 +31,14 @@ public class ProfileManager
   public Profile retrieveProfile()
   {
     // create the handle for the profile data file
-    FileHandle profileDataFile = Gdx.files.local( PROFILE_DATA_FILE );
+    final FileHandle profileDataFile = Gdx.files.local( PROFILE_DATA_FILE );
     Gdx.app.log( Tyrian.LOG, "Retrieving profile from: " + profileDataFile.path() );
 
     // if the profile is already loaded, just return it
     if( profile != null ) return profile;
 
     // create the JSON utility object
-    Json json = new Json();
+    final Json json = new Json();
 
     // check if the profile data file exists
     if( profileDataFile.exists() )
@@ -90,14 +90,14 @@ public class ProfileManager
   /**
    * Persists the given profile.
    */
-  protected void persist( Profile profile )
+  void persist( final Profile profile )
   {
     // create the handle for the profile data file
-    FileHandle profileDataFile = Gdx.files.local( PROFILE_DATA_FILE );
+    final FileHandle profileDataFile = Gdx.files.local( PROFILE_DATA_FILE );
     Gdx.app.log( Tyrian.LOG, "Persisting profile in: " + profileDataFile.path() );
 
     // create the JSON utility object
-    Json json = new Json();
+    final Json json = new Json();
 
     // convert the given profile to text
     String profileAsText = json.toJson( profile );

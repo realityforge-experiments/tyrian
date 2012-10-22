@@ -21,18 +21,17 @@ public class LRUCache<K, V>
     void notifyEntryRemoved( K key, V value );
   }
 
-  private Map<K, V> cache;
+  private final Map<K, V> cache;
   private CacheEntryRemovedListener<K, V> entryRemovedListener;
 
   /**
    * Creates the cache with the specified max entries.
    */
-  public LRUCache(
-    final int maxEntries )
+  public LRUCache( final int maxEntries )
   {
     cache = new LinkedHashMap<K, V>( maxEntries + 1, .75F, true )
     {
-      public boolean removeEldestEntry( Map.Entry<K, V> eldest )
+      public boolean removeEldestEntry( final Map.Entry<K, V> eldest )
       {
         if( size() > maxEntries )
         {
@@ -47,12 +46,12 @@ public class LRUCache<K, V>
     };
   }
 
-  public void add( K key, V value )
+  public void add( final K key, final V value )
   {
     cache.put( key, value );
   }
 
-  public V get( K key )
+  public V get( final K key )
   {
     return cache.get( key );
   }
@@ -62,7 +61,7 @@ public class LRUCache<K, V>
     return cache.values();
   }
 
-  public void setEntryRemovedListener( CacheEntryRemovedListener<K, V> entryRemovedListener )
+  public void setEntryRemovedListener( final CacheEntryRemovedListener<K, V> entryRemovedListener )
   {
     this.entryRemovedListener = entryRemovedListener;
   }

@@ -39,10 +39,9 @@ public class Ship
   /**
    * Checks whether the ship contains the given item.
    */
-  public boolean contains( Item item )
+  public boolean contains( final Item item )
   {
-    if( item == null ) return false;
-    return ( item.equals( shipModel ) || item.equals( frontGun ) || item.equals( shield ) );
+    return item != null && ( item.equals( shipModel ) || item.equals( frontGun ) || item.equals( shield ) );
   }
 
   /**
@@ -50,7 +49,7 @@ public class Ship
    * <p/>
    * No credit verification is done here.
    */
-  public void install( Item item )
+  public void install( final Item item )
   {
     Gdx.app.log( Tyrian.LOG, "Installing item: " + item );
     if( item instanceof ShipModel )
@@ -74,7 +73,7 @@ public class Ship
   // Serializable implementation
 
   @Override
-  public void read( Json json, OrderedMap<String, Object> jsonData )
+  public void read( final Json json, final OrderedMap<String, Object> jsonData )
   {
     shipModel = ShipModel.valueOf( json.readValue( "shipModel", String.class, jsonData ) );
     frontGun = FrontGun.valueOf( json.readValue( "frontGun", String.class, jsonData ) );
@@ -82,7 +81,7 @@ public class Ship
   }
 
   @Override
-  public void write( Json json )
+  public void write( final Json json )
   {
     json.writeValue( "shipModel", shipModel.name() );
     json.writeValue( "frontGun", frontGun.name() );

@@ -19,9 +19,8 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 public class SplashScreen
   extends AbstractScreen
 {
-  private Image splashImage;
 
-  public SplashScreen( Tyrian game )
+  public SplashScreen( final Tyrian game )
   {
     super( game );
   }
@@ -35,12 +34,12 @@ public class SplashScreen
     game.getMusicManager().play( TyrianMusic.MENU );
 
     // retrieve the splash image's region from the atlas
-    AtlasRegion splashRegion = getAtlas().findRegion( "splash-screen/splash-image" );
-    Drawable splashDrawable = new TextureRegionDrawable( splashRegion );
+    final AtlasRegion splashRegion = getAtlas().findRegion( "splash-screen/splash-image" );
+    final Drawable splashDrawable = new TextureRegionDrawable( splashRegion );
 
     // here we create the splash image actor; its size is set when the
     // resize() method gets called
-    splashImage = new Image( splashDrawable, Scaling.stretch );
+    final Image splashImage = new Image( splashDrawable, Scaling.stretch );
     splashImage.setFillParent( true );
 
     // this is needed for the fade-in effect to work correctly; we're just
@@ -53,7 +52,7 @@ public class SplashScreen
                                      {
                                        @Override
                                        public boolean act(
-                                         float delta )
+                                         final float delta )
                                        {
                                          // the last action will move to the next screen
                                          game.setScreen( new MenuScreen( game ) );
