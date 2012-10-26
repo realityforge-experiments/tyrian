@@ -3,9 +3,7 @@ package com.blogspot.steigert.tyrian.domain;
 import com.blogspot.steigert.tyrian.utils.TextUtils;
 import java.util.Locale;
 
-/**
- * The available ship's front-guns.
- */
+/** The available ship's front-guns. */
 public enum FrontGun
   implements Item
 {

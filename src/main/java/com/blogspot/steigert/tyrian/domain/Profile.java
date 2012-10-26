@@ -111,7 +111,7 @@ public class Profile
     // libgdx handles the keys of JSON formatted HashMaps as Strings, but we
     // want it to be an integer instead (levelId)
     final Map<String, Integer> highScores = json.readValue( "highScores", HashMap.class,
-                                                      Integer.class, jsonData );
+                                                            Integer.class, jsonData );
     for( final String levelIdAsString : highScores.keySet() )
     {
       final int levelId = Integer.valueOf( levelIdAsString );

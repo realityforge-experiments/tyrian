@@ -109,7 +109,7 @@ public class Ship2D
   {
     // load all the regions of our ship in the image atlas
     final Array<AtlasRegion> regions = textureAtlas.findRegions( "level-screen/"
-                                                           + ship.getShipModel().getSimpleName() );
+                                                                 + ship.getShipModel().getSimpleName() );
 
     // create the ship
     return new Ship2D( regions );
