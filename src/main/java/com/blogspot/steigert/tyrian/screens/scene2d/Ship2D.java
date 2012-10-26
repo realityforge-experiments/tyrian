@@ -242,12 +242,18 @@ public class Ship2D
     if( velocity.x < 0 )
     {
       frame = tiltAnimation.getKeyFrame( tiltAnimationStateTime += delta, false );
-      if( frame.getRegionWidth() < 0 ) frame.flip( true, false );
+      if( frame.isFlipX() )
+      {
+        frame.flip( true, false );
+      }
     }
     else if( velocity.x > 0 )
     {
       frame = tiltAnimation.getKeyFrame( tiltAnimationStateTime += delta, false );
-      if( frame.getRegionWidth() > 0 ) frame.flip( true, false );
+      if( !frame.isFlipX() )
+      {
+        frame.flip( true, false );
+      }
     }
     else
     {
